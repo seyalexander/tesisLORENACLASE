@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "Id_Rol_Usuario": 1,
+      "Descripcion_Rol": "Administrador"
+    },
+    {
+      "Id_Rol_Usuario": 2,
+      "Descripcion_Rol": "Soporte"
+    }
+  ]
+}

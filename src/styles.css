@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+
+  --color-principal-1: rgb(96, 75, 235);
+  --color-principal-1_hover: rgb(137, 123, 228);
+  --color-principal-2: rgb(255, 255, 255);
+  --color-principal-3: rgb(195, 205, 228);
+
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
