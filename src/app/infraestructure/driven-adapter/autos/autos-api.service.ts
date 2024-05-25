@@ -17,20 +17,14 @@ export class AutosApiService extends autosGateway{
 
   private URL = environment.api;
 
+
   override getAllAutos(): Observable<autosModel[]> {
     return this.httpClient.get<autosModel[]>(`${this.URL}/MostrarAuto`)
   }
 
-  override newAutos(autos: autosModel): Observable<Object> {
-    return this.httpClient.post(`${this.URL}/InsertarAuto`, autos)
-  }
 
   override getById(id: number): Observable<autosModel[]> {
     return this.httpClient.get<autosModel[]>(`${this.URL}/buscarAutoPorCliente/${id}`)
-  }
-
-  override updatAuto(id_Auto: number, auto: autosModel): Observable<Object> {
-    return this.httpClient.put(`${this.URL}/ActualizarAuto/${id_Auto}`, auto)
   }
 
   constructor(private httpClient: HttpClient) {

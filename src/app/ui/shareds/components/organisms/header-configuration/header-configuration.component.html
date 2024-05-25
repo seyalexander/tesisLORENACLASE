@@ -1,0 +1,25 @@
+<header>
+  <ul>
+    <li *ngFor="let item of mainMenu.accessLink">
+      <div class="menu-item">
+        <app-button-text-icon-sidebar
+          [mode]="'header'"
+          [textButton]="item.name"
+          [iconRigthButton]="'uil-angle-down'"
+        />
+        <div class="modal_submenu">
+          <ul>
+            <li *ngFor="let subItem of item.subOpciones">
+              <app-button-text-icon-sidebar
+                [mode]="'subHeader'"
+                [routerLink]="subItem.route"
+                [textButton]="subItem.name_sub"
+                [iconLeftButton]="subItem.icon_sub"
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  </ul>
+</header>

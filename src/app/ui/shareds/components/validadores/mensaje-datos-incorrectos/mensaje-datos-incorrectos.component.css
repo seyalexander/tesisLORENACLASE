@@ -1,0 +1,27 @@
+.container-validador {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  & .bg-icono {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    background-color: rgb(255, 191, 16);
+    border-radius: 5px 0 0 5px;
+
+    & i {
+      color: white;
+      font-size: 20px;
+    }
+  }
+
+  & span {
+    font-size: 0.8rem;
+    color: rgb(58, 58, 58);
+  }
+}

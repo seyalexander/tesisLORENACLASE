@@ -1,3 +1,12 @@
+@if (showRegistro) {
+  <div class="modal-registro">
+    <app-registrar-cita-page
+      (cerrarComponenteEvent)="mostrarComponente()"
+    />
+  </div>
+}
+
+
 <div class="container-cita">
   <div class="container-cita_lista-vehiculos">
     <div class="container-cita_lista-vehiculos_items-container">
@@ -56,17 +65,17 @@
             <i class="uil uil-search"></i> Buscar
           </button>
         </div>
-        <button><i class="uil uil-plus"></i> Nueva cita</button>
+        <button (click)="mostrarComponente()"><i class="uil uil-plus"></i> Nueva cita</button>
       </header>
 
       <div class="detaller-cita-general">
         <p>
-          Cantidad: <span>{{ datosAutoslista.length }}</span>
+          Cantidad: <span>{{ datosCitaslista.length }}</span>
         </p>
       </div>
 
       <ul class="container-cita_estado-reservacion_citas_tarjeta-container">
-        @for (item of datosAutoslista; track $index) {
+        @for (item of datosCitaslista; track $index) {
         <li>
           <div class="bg-encabezado-tarjeta">
             <div class="icono-foto-auto">
@@ -76,22 +85,22 @@
           <div class="informacion-auto-cita-container">
             <div class="informacion-auto-cita-container_superior">
               <div class="informacion-auto-cita-container_superior_izquierda">
-                <h5>{{item.matricula}}</h5>
-                <h5><span>Modelo:</span>{{item.idModeloFk.modelo}}</h5>
-                <h5><span>Marca:</span>{{item.idModeloFk.idMarcaFK.marca}}</h5>
+                <h5>{{item.id_Auto_Fk.matricula}}</h5>
+                <h5><span>Modelo:</span>{{item.id_Auto_Fk.idModeloFk.modelo}}</h5>
+                <h5><span>Marca:</span>{{item.id_Auto_Fk.idModeloFk.idMarcaFK.marca}}</h5>
               </div>
               <div class="informacion-auto-cita-container_superior_derecha">
-                <div class="container-estado">En espera</div>
+                <div class="container-estado ">En espera</div>
               </div>
             </div>
             <div class="informacion-auto-cita-container_inferior">
               <div class="container-detalles">
                 <h4>Fecha</h4>
-                <span>15-05-2024</span>
+                <span>{{item.fecha}}</span>
               </div>
               <div class="container-detalles">
                 <h4>Hora</h4>
-                <span>09:30 am</span>
+                <span>{{item.hora}}</span>
               </div>
             </div>
           </div>

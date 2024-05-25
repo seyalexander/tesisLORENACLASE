@@ -1,1 +1,53 @@
-<p>registrar-cita-page works!</p>
+<article class="container-registrar">
+  <div class="parte-superior">
+    <h2>REGISTRAR CITA</h2>
+    <button (click)="cerrarComponente()">
+      <i class="uil uil-x"></i>
+    </button>
+  </div>
+  <div class="parte-inferior">
+    <form (ngSubmit)="sendModeloAuto()" [formGroup]="formularioRegistro">
+      <div class="container-grupos">
+        <div class="grupo-inputs">
+          <!-- <div class="bg-input">
+            <div class="bg-label">
+              <label for="Auto">Auto*:</label>
+            </div>
+            <input
+              [autofocus]
+              formControlName="Auto"
+              type="text"
+              id="Auto"
+              name="Auto"
+              placeholder="Registrar cliente"
+              required
+              [(ngModel)]="Auto.matricula"
+            />
+          </div> -->
+        </div>
+        <div class="grupo-inputs">
+          <div class="bg-input">
+            <div class="bg-label">
+              <label for="dbMarcaAuto">Seleccionar modelo*:</label>
+            </div>
+            <select formControlName="Auto" [(ngModel)]="cita.id_Auto_Fk"  name="demo" id="#">
+              <option value=""  disabled selected>Seleccionar</option>
+              <option  *ngFor="let item of datosAutoslista" [value]="item.id_Auto">{{item.matricula}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="opciones-form">
+        <button
+          class="btn btn-success"
+          role="button"
+          [disabled]="!formularioRegistro.valid"
+        >
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</article>
+

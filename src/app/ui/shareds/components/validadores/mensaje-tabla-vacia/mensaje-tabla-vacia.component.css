@@ -1,0 +1,9 @@
+article {
+  & span {
+    color: rgb(155, 155, 155);
+  }
+
+  & .nombre-pagina {
+    color: #0AB4D1;
+  }
+}

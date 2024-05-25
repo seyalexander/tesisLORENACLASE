@@ -1,0 +1,161 @@
+.button-aside,
+.button-header,
+.button-sub-header {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.button-aside {
+  height: 2rem;
+  padding: 5px 10px 5px 5px;
+  background-color: transparent;
+  border-radius: 5px;
+  justify-content: left;
+  transition: all 0.3s ease;
+
+  & span {
+    color: white;
+  }
+
+
+  & .bg-icono {
+    background-color: rgba(10, 180, 209, 0);
+    border-radius: 5px;
+    margin-right: 6px;
+    display: grid;
+    place-items: center;
+    transition: all 0.3s ease;
+  }
+
+  & i {
+    font-size: 16px;
+    margin-left: 4px;
+    margin-right: 6px;
+    color: white;
+  }
+}
+
+.button-aside:hover {
+  background-color: rgba(10, 180, 209, 0.8);
+  transition: all 0.3s ease;
+
+}
+
+.button-aside:hover .bg-icono {
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.button-aside:active {
+  background-color: rgba(19, 173, 201, 0.8);
+}
+
+
+/* Diseño de Button header */
+
+.button-header {
+  width: 100%;
+  height: 2rem;
+  padding: 5px 10px;
+  background-color: white;
+  border-radius: 5px;
+  justify-content: left;
+
+  & span {
+    color: #797E81;
+  }
+
+  & i {
+    font-size: 16px;
+    margin-left: 4px;
+    margin-right: 6px;
+    color: #0D1216;
+  }
+}
+
+.button-header:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.button-header :active {
+  background-color: #E1E4E7;
+}
+
+
+/* Diseño de Button sub menu header */
+
+.button-sub-header {
+  padding: 5px 10px;
+  border-radius: 5px;
+  justify-content: left;
+  background-color: white;
+  transition: all 0.3s ease;
+
+  & span {
+    color: #797E81;
+  }
+
+  & .bg-icono {
+    background-color: rgba(19, 173, 201, 0.2);
+    border-radius: 5px;
+    margin:2px 6px 2px 0px;
+
+    & i {
+      font-size: 20px;
+      margin-left: 4px;
+      margin-right: 6px;
+      color: rgba(19, 173, 201, 1);
+    }
+  }
+
+
+}
+
+.button-sub-header:hover {
+  transition: all 0.3s ease;
+  background-color: rgba(19, 173, 201, 0.1);
+}
+
+.button-sub-header:hover .bg-icono{
+  transition: all 0.3s ease;
+  background-color: rgba(19, 173, 201, 0.4);
+}
+
+.button-sub-header:hover .bg-icono i{
+  transition: all 0.3s ease;
+  color: rgb(255, 255, 255);
+}
+
+.button-sub-header:hover span {
+  color: #5a5d5f;
+}
+
+
+.button-sub-header:active {
+  background-color: #E1E4E7;
+}
+
+@media (max-width: 480px) {
+  .button-aside {
+    height: 42px;
+  }
+}
+
+@media (max-width: 767px) {
+
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+}
+
+@media (min-width: 1025px) {
+
+}

@@ -1,0 +1,9 @@
+<button [class]="{'button-aside':mode == 'aside', 'button-header':mode == 'header', 'button-sub-header':mode == 'subHeader'}">
+  <div class="bg-icono">
+    <i [class]="iconLeftButton"></i>
+  </div>
+  <span>{{textButton}}</span>
+  <i [class]="iconRigthButton"></i>
+</button>
+
+

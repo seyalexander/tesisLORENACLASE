@@ -8,12 +8,8 @@ import { marcaAutosModel } from '../../../domain/models/marcas-autos/marca-autos
 @Injectable({
   providedIn: 'root'
 })
-export class MarcaAutosApiService extends marcaAutosGateway{
 
-  // override getAll(): Observable<marcaAutosModel[]> {
-  //   const { data }: any = (dataRaw as any).default;
-  //   return of(data);
-  // }
+export class MarcaAutosApiService extends marcaAutosGateway{
 
   private URL = environment.api;
 

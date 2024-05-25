@@ -14,6 +14,8 @@ import { tipoDocumentoGateway } from './domain/models/tipo-documentos/gateway/ti
 import { ModeloAutosApiService } from './infraestructure/driven-adapter/modelo-autos/modelo-autos-api.service';
 import { AutosApiService } from './infraestructure/driven-adapter/autos/autos-api.service';
 import { TipoDocumentoApiService } from './infraestructure/driven-adapter/tipo-documento/tipo-documento-api.service';
+import { citasGateway } from './domain/models/citas/gateway/citas-gateway';
+import { CitasApiService } from './infraestructure/driven-adapter/citas/citas-api.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +25,7 @@ export const appConfig: ApplicationConfig = {
     { provide: marcaAutosGateway, useClass: MarcaAutosApiService },
     { provide: modeloAutosGateway, useClass: ModeloAutosApiService },
     { provide: autosGateway, useClass: AutosApiService },
+    { provide: citasGateway, useClass: CitasApiService },
     { provide: tipoDocumentoGateway, useClass: TipoDocumentoApiService },
     {provide:HTTP_INTERCEPTORS,useClass:ClienteInterceptorService,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptorService,multi:true},
