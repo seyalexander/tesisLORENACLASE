@@ -45,11 +45,11 @@ export class RegistrarCitaPageComponent {
   // INYECCION DE SERVICIOS DESDE LOS CASOS DE USO
   //============================================================================
   constructor(
-    private _getAutoUseCase: GetAutosUseCases,
     private _postCitasUseCase: GetCitasUseCase,
     private _tokenLogin: AuthService,
     private _getChoferesUseCase: GetChoferesUseCases,
-    private loginService: AuthService
+    private loginService: AuthService,
+    private _getAutosUseCase: GetAutosUseCases
   ) { }
 
   cita: citasModel = new citasModel();
@@ -70,6 +70,7 @@ export class RegistrarCitaPageComponent {
               this.userLoginId = userLoginId
               if(this.userLoginId > 0 || this.userLoginId != null) {
                 this.listarCitas(this.userLoginId)
+                this.obtenerAutosExito(this.userLoginId)
               }
 
             }
@@ -92,8 +93,8 @@ export class RegistrarCitaPageComponent {
       descripcion: new FormControl('', [
         Validators.required,
       ]),
-      id_Auto_Fk: new FormControl('', []),
-      id_Chofer_Fk: new FormControl('', []),
+      id_Auto_Fk: new FormControl(0, []),
+      id_Chofer_Fk: new FormControl(0, []),
       fecha: new FormControl('', []),
       hora: new FormControl('', []),
     });
@@ -124,6 +125,13 @@ export class RegistrarCitaPageComponent {
   //================================================================
   datosAutoslista: Array<autosModel> = [];
   private autoSubscription: Subscription | undefined;
+  obtenerAutosExito(idCliente: number): void {
+    this.autoSubscription = this._getAutosUseCase
+    .getByIdCliente(idCliente)
+    .subscribe((Response: autosModel[]) => {
+        this.datosAutoslista = Response;
+      })
+  }
 
   //============================================================================
   // MOSTRAR LISTADO MODELO AUTOS - DESPLEGABLE
@@ -145,13 +153,13 @@ export class RegistrarCitaPageComponent {
   //============================================================================
 
   public sendCita(): void {
-
     const formValue = this.cita;
     const horaValue = this.cita.hora;
     const horaConSegundos = horaValue.length === 5 ? horaValue + ':00' : horaValue;
-    formValue.hora = horaConSegundos;  // Renombrar Hora a fora
+    formValue.hora = horaConSegundos;
+    console.log('Datos a enviar:', formValue);
     this._postCitasUseCase
-      .newCitas(formValue)  // Enviar formValue en lugar de this.cita
+      .newCitas(formValue)
       .subscribe((response: any) => {
         this.cerrarComponente();
         this.mensajeValidacionRegistroCorrecto(response);
