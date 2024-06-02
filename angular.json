@@ -96,14 +96,6 @@
             ],
             "scripts": []
           }
-        },
-        "deploy": {
-          "builder": "@netlify-builder/deploy:deploy",
-          "options": {
-            "outputPath": "dist/cliente-citas",
-            "netlifyToken": "seyAlexander$2023*",
-            "siteId": "CITASAUTOGEST"
-          }
         }
       }
     }
