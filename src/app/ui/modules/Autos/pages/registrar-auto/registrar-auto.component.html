@@ -1,7 +1,7 @@
 <article class="container-registrar">
   <div class="parte-superior">
-    <h2>REGISTRAR CITA</h2>
-    <button (click)="cerrarComponente()">
+    <h2>REGISTRAR AUTO</h2>
+    <button (click)="cerrarComponenteAuto()">
       <i class="uil uil-x"></i>
     </button>
   </div>
@@ -9,7 +9,7 @@
     <form (ngSubmit)="sendModeloAuto()" [formGroup]="formularioRegistro">
       <div class="container-grupos">
         <div class="grupo-inputs">
-          <!-- <div class="bg-input">
+          <div class="bg-input">
             <div class="bg-label">
               <label for="Auto">Auto*:</label>
             </div>
@@ -23,16 +23,16 @@
               required
               [(ngModel)]="Auto.matricula"
             />
-          </div> -->
+          </div>
         </div>
         <div class="grupo-inputs">
           <div class="bg-input">
             <div class="bg-label">
               <label for="dbMarcaAuto">Seleccionar modelo*:</label>
             </div>
-            <select formControlName="Auto" [(ngModel)]="cita.id_Auto_Fk"  name="demo" id="#">
+            <select formControlName="AutoDb" [(ngModel)]="Auto.idModeloFk.id_Modelo"  name="demo" id="#">
               <option value=""  disabled selected>Seleccionar</option>
-              <option  *ngFor="let item of datosAutoslista" [value]="item.id_Auto">{{item.matricula}}</option>
+              <option  *ngFor="let item of datosModeloAutoslista" [value]="item.id_Modelo">{{item.modelo}}</option>
             </select>
           </div>
         </div>
@@ -50,4 +50,5 @@
     </form>
   </div>
 </article>
+
 

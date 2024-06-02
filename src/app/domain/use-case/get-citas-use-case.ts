@@ -18,4 +18,7 @@ export class GetCitasUseCase {
     return this._citasGateWay.newCita(citas);
   }
 
+  getByIdUnique(id: number): Observable<citasModel>{
+    return this._citasGateWay.getByIdUnique(id)
+  }
 }

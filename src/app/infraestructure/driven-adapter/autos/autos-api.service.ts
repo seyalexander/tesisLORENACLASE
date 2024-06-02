@@ -22,9 +22,17 @@ export class AutosApiService extends autosGateway{
     return this.httpClient.get<autosModel[]>(`${this.URL}/MostrarAuto`)
   }
 
+  override newAutos(autos: autosModel): Observable<Object> {
+    return this.httpClient.post(`${this.URL}/InsertarAuto`, autos)
+  }
+
 
   override getById(id: number): Observable<autosModel[]> {
     return this.httpClient.get<autosModel[]>(`${this.URL}/buscarAutoPorCliente/${id}`)
+  }
+
+  override getByIdCliente(idCliente: number): Observable<autosModel[]> {
+    return this.httpClient.get<autosModel[]>(`${this.URL}/buscarAutoPorCliente/${idCliente}`)
   }
 
   constructor(private httpClient: HttpClient) {

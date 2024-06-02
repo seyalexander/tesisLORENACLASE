@@ -20,6 +20,10 @@ export class CitasApiService extends citasGateway {
     return this.httpClient.post(`${this.URL}/InsertarCitas`, citas)
   }
 
+  override getByIdUnique(id: number): Observable<citasModel> {
+    return this.httpClient.get<citasModel>(`${this.URL}/BuscarCitas/${id}`)
+  }
+
   constructor(private httpClient: HttpClient) {
     super();
   }

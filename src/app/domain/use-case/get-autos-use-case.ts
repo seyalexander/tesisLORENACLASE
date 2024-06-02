@@ -20,4 +20,12 @@ export class GetAutosUseCases {
   getById (id: number): Observable <Array<autosModel>> {
     return this._autosGateWay.getById(id);
   }
+
+  getByIdCliente(idCliente: number): Observable<Array<autosModel>> {
+      return this._autosGateWay.getByIdCliente(idCliente)
+  }
+
+  newAuto (autos: autosModel) : Observable <object> {
+    return this._autosGateWay.newAutos(autos);
+  }
 }

@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
 
   --color-principal-1: rgb(96, 75, 235);
@@ -25,10 +29,3 @@ body {
   position: relative;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
-button:disabled {
-  opacity: 0.5;
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

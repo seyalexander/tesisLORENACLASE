@@ -16,6 +16,11 @@ import { AutosApiService } from './infraestructure/driven-adapter/autos/autos-ap
 import { TipoDocumentoApiService } from './infraestructure/driven-adapter/tipo-documento/tipo-documento-api.service';
 import { citasGateway } from './domain/models/citas/gateway/citas-gateway';
 import { CitasApiService } from './infraestructure/driven-adapter/citas/citas-api.service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { choferesGateway } from './domain/models/choferes/gateway/choferes-gateway';
+import { ChoferesApiService } from './infraestructure/driven-adapter/choferes/choferes-api.service';
+import { clientesGateway } from './domain/models/clientes/gateway/clientes-gateway';
+import { ClientesApiService } from './infraestructure/driven-adapter/clientes/clientes-api.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +31,10 @@ export const appConfig: ApplicationConfig = {
     { provide: modeloAutosGateway, useClass: ModeloAutosApiService },
     { provide: autosGateway, useClass: AutosApiService },
     { provide: citasGateway, useClass: CitasApiService },
+    { provide: clientesGateway, useClass: ClientesApiService},
+    { provide: choferesGateway, useClass: ChoferesApiService },
     { provide: tipoDocumentoGateway, useClass: TipoDocumentoApiService },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     {provide:HTTP_INTERCEPTORS,useClass:ClienteInterceptorService,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptorService,multi:true},
     provideHttpClient(withInterceptorsFromDi())

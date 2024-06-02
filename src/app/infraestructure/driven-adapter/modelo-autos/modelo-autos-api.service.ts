@@ -30,8 +30,6 @@ export class ModeloAutosApiService extends modeloAutosGateway{
   }
 
   override updateModelo(id_Modelo: number, modeloAuto: modeloAutosModel): Observable<Object> {
-    console.log("servicio modelo id: ", id_Modelo);
-    console.log("servicio modelo objeto: ", modeloAuto);
     return this.httpClient.put(`${this.URL}/ActualizarModelo/${id_Modelo}`, modeloAuto)
   }
 

@@ -9,4 +9,5 @@ export class citasModel {
   descripcion: string = ''
   id_Auto_Fk: autosModel = {} as autosModel
   id_Chofer_Fk: choferesModel = {} as choferesModel
+  estado: string = ''
 }

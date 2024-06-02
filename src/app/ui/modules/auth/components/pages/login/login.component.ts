@@ -39,10 +39,9 @@ export class LoginComponent implements OnInit{
       this.loginError="";
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData: any) => {
-          console.log(userData);
+
         },
         error: (errorData:any) => {
-          console.error(errorData);
           this.loginError=errorData;
         },
         complete: () => {

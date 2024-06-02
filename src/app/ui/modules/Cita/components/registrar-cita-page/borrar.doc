@@ -1,0 +1,110 @@
+<article class="container-registrar">
+  <div class="parte-superior">
+    <h2>REGISTRAR CITA</h2>
+    <button (click)="cerrarComponente()">
+      <i class="uil uil-x"></i>
+    </button>
+  </div>
+  <div class="parte-inferior">
+    <form (ngSubmit)="sendCita()" [formGroup]="formularioRegistro">
+      <div class="container-grupos">
+        <div class="grupo-inputs">
+          <div class="bg-input">
+            <div class="bg-label">
+              <label for="tipoConsulta">Tipo consulta*:</label>
+            </div>
+            <input
+              formControlName="tipo_Consulta"
+              [(ngModel)]="cita.tipo_Consulta"
+              type="text"
+              id="tipoConsulta"
+              placeholder="Registrar Tipo consulta"
+              required
+            />
+          </div>
+          <div class="bg-input">
+            <div class="bg-label">
+              <label for="descripcion">Descripción*:</label>
+            </div>
+            <input
+              formControlName="descripcion"
+              [(ngModel)]="cita.descripcion"
+              type="text"
+              id="descripcion"
+              placeholder="Registrar descripción"
+              required
+            />
+          </div>
+          <div class="bg-input">
+            <div class="bg-label">
+              <label for="fecha">Fecha*:</label>
+            </div>
+            <input
+              formControlName="fecha"
+              [(ngModel)]="cita.fecha"
+              type="date"
+              id="fecha"
+              placeholder="Registrar fecha"
+              required
+
+            />
+          </div>
+          <div class="bg-input">
+            <div class="bg-label">
+              <label for="hora">Hora*:</label>
+            </div>
+            <input
+              formControlName="hora"
+              [(ngModel)]="cita.hora"
+              type="time"
+              id="hora"
+              placeholder="Registrar hora"
+              required
+
+            />
+          </div>
+        </div>
+        <div class="grupo-inputs">
+          <div class="bg-input">
+            <div class="bg-label">
+              <label for="auto">Seleccionar placa*:</label>
+            </div>
+            <select
+              formControlName="id_Auto_Fk"
+              [(ngModel)]="cita.id_Auto_Fk.id_Auto"
+            >
+              <option value="" disabled selected>Seleccionar</option>
+              <option
+                *ngFor="let item of citasResponse"
+                [value]="item.id_Auto_Fk.id_Auto"
+              >
+                {{ item.id_Auto_Fk.matricula }}
+              </option>
+            </select>
+          </div>
+          <div class="bg-input">
+            <div class="bg-label">
+              <label for="chofer">Seleccionar choferes*:</label>
+            </div>
+            <select
+              formControlName="id_Chofer_Fk"
+              [(ngModel)]="cita.id_Chofer_Fk.id_Chofer"
+            >
+              <option value="" disabled selected>Seleccionar</option>
+              <option
+                *ngFor="let item of datosChofereslista"
+                [value]="item.id_Chofer"
+              >
+                {{ item.nombres }} {{ item.apellidos }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="opciones-form">
+        <button class="btn btn-success" role="button" [disabled]="!formularioRegistro.valid">Guardar</button>
+      </div>
+    </form>
+  </div>
+</article>
