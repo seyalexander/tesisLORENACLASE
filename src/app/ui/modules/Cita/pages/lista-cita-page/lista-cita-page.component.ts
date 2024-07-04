@@ -11,6 +11,8 @@ import { RegistrarCitaPageComponent } from '../registrar-cita-page/registrar-cit
 import { ModalItemCitaComponent } from '../../components/modal-item-cita/modal-item-cita.component';
 import autoTable from 'jspdf-autotable';
 import jsPDF from 'jspdf';
+import { clienteModel } from '../../../../../domain/models/clientes/clientes.model';
+import { choferesModel } from '../../../../../domain/models/choferes/choferes.model';
 
 @Component({
   selector: 'app-lista-cita-page',
@@ -167,12 +169,17 @@ export class ListaCitaPageComponent {
   }
 
   citaSeleccionada: citasModel = {} as citasModel;
+  clienteSeleccionado: clienteModel = {} as clienteModel;
+  choferSeleccionado: choferesModel = {} as choferesModel;
   citaSeleccionado(idCita: number) {
     this._getCitasUseCase
       .getByIdUnique(idCita)
       .subscribe((Response: citasModel) => {
         this.citaSeleccionada = Response;
-        this.showModal = true
+        this.clienteSeleccionado = Response.id_Auto_Fk.idClienteFk
+        this.choferSeleccionado = Response.id_Chofer_Fk
+        console.log("CITA OBJETO: ", Response);
+
       });
   }
 

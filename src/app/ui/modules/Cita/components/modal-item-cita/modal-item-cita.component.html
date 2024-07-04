@@ -36,10 +36,10 @@
       <div class="p-4 sm:p-7 overflow-y-auto">
         <div class="text-center">
           <h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-            {{citaSeleccionada.id_Auto_Fk.idClienteFk.razon_Social | json }}
+            {{clienteSeleecionada.razon_Social }}
           </h3>
           <p class="text-sm text-gray-500 dark:text-neutral-500">
-            Cita: {{citaSeleccionada.id_Citas| json }}
+            Cita: {{citaSeleccionada.id_Citas }}
           </p>
         </div>
 
@@ -74,13 +74,13 @@
             <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-neutral-700 dark:text-neutral-200">
               <div class="flex items-center justify-between w-full">
                 <span>Tipo consult</span>
-                <span>{{citaSeleccionada.tipo_Consulta| json }}</span>
+                <span>{{citaSeleccionada.tipo_Consulta }}</span>
               </div>
             </li>
             <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-neutral-700 dark:text-neutral-200">
               <div class="flex items-center justify-between w-full">
                 <span>Chofer</span>
-                <span>{{citaSeleccionada.id_Chofer_Fk.nombres }} {{citaSeleccionada.id_Chofer_Fk.apellidos  }}</span>
+                <span>{{choferSeleecionada.nombres }} {{choferSeleecionada.apellidos  }}</span>
               </div>
             </li>
             <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200">

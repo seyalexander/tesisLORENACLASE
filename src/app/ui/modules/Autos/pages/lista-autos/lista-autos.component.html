@@ -4,12 +4,8 @@
   </div>
 }
 
-@if (showModal) {
-  <div class="modal-registro">
     <app-modal-autos
     (cerrarComponenteEvent)="mostrarComponenteModal()" />
-  </div>
-}
 
 
   <!-- Table Section -->
@@ -142,7 +138,7 @@
                     </td>
 
                     <td class="size-px whitespace-nowrap">
-                      <button (click)="mostrarComponenteModal()"  type="button" class="block" data-hs-overlay="#hs-ai-invoice-modal">
+                      <button (click)="mostrarComponenteModal()"  type="button" class="block" data-hs-overlay="#hs-ai-invoice-modal-autos">
                         <span class="px-6 py-1.5">
                           <span class="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm">
                             <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">

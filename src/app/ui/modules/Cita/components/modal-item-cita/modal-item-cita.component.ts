@@ -3,6 +3,8 @@ import { citasModel } from '../../../../../domain/models/citas/citas.model';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { CommonModule } from '@angular/common';
+import { clienteModel } from '../../../../../domain/models/clientes/clientes.model';
+import { choferesModel } from '../../../../../domain/models/choferes/choferes.model';
 
 @Component({
   selector: 'app-modal-item-cita',
@@ -14,14 +16,8 @@ import { CommonModule } from '@angular/common';
 export class ModalItemCitaComponent {
 
   @Input() citaSeleccionada: citasModel = {} as citasModel;
-
-  showRegistro: boolean = true
-  @Output() cerrarComponenteEvent = new EventEmitter<void>();
-  cerrarComponente(): void {
-    this.showRegistro = false;
-    this.cerrarComponenteEvent.emit();
-  }
-
+  @Input() clienteSeleecionada: clienteModel = {} as clienteModel;
+  @Input() choferSeleecionada: choferesModel = {} as choferesModel;
 
   exportToPDF() {
     const doc = new jsPDF();

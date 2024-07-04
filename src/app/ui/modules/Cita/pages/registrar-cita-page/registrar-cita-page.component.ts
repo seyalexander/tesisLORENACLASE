@@ -241,15 +241,15 @@ export class RegistrarCitaPageComponent {
   //============================================================================
 
   ngOnDestroy(): void {
-    if (this.citaSubscription) {
-      this.citaSubscription.unsubscribe();
-    }
-    if (this.choferesSubscription) {
-      this.choferesSubscription.unsubscribe();
-    }
-    if(this.horasSubscription) {
-      this.horasSubscription.unsubscribe();
-    }
+    // if (this.citaSubscription) {
+    //   this.citaSubscription.unsubscribe();
+    // }
+    // if (this.choferesSubscription) {
+    //   this.choferesSubscription.unsubscribe();
+    // }
+    // if(this.horasSubscription) {
+    //   this.horasSubscription.unsubscribe();
+    // }
   }
 
   showRegistroCita: boolean = false
