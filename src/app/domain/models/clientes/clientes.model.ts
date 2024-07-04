@@ -1,7 +1,7 @@
 export class clienteModel {
   id_Cliente: number = 0;
-  ruc: String = '';
-  razon_Social: String = ''
-  representante_Legal: String = '';
-  telefono: String = '';
+  ruc: string = '';
+  razon_Social: string = ''
+  representante_Legal: string = '';
+  telefono: string = '';
 }

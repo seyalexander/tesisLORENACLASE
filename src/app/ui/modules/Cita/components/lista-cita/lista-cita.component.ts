@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { GetAutosUseCases } from '../../../../../domain/use-case/get-autos-use-case';
 import { GetCitasUseCase } from '../../../../../domain/use-case/get-citas-use-case';
 import { AuthService } from '../../../../../infraestructure/driven-adapter/login/auth.service';
-import { RegistrarCitaPageComponent } from '../registrar-cita-page/registrar-cita-page.component';
+import { RegistrarCitaPageComponent } from '../../pages/registrar-cita-page/registrar-cita-page.component';
 
 
 @Component({

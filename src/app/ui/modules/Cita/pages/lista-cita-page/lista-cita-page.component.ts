@@ -7,7 +7,7 @@ import { AuthService } from '../../../../../infraestructure/driven-adapter/login
 import { citasModel } from '../../../../../domain/models/citas/citas.model';
 import { GetCitasUseCase } from '../../../../../domain/use-case/get-citas-use-case';
 import { Router, RouterModule } from '@angular/router';
-import { RegistrarCitaPageComponent } from '../../components/registrar-cita-page/registrar-cita-page.component';
+import { RegistrarCitaPageComponent } from '../registrar-cita-page/registrar-cita-page.component';
 import { ModalItemCitaComponent } from '../../components/modal-item-cita/modal-item-cita.component';
 import autoTable from 'jspdf-autotable';
 import jsPDF from 'jspdf';

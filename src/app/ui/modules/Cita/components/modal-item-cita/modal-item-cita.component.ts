@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { citasModel } from '../../../../../domain/models/citas/citas.model';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal-item-cita',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './modal-item-cita.component.html',
   styleUrl: './modal-item-cita.component.css'
 })

@@ -21,6 +21,8 @@ import { choferesGateway } from './domain/models/choferes/gateway/choferes-gatew
 import { ChoferesApiService } from './infraestructure/driven-adapter/choferes/choferes-api.service';
 import { clientesGateway } from './domain/models/clientes/gateway/clientes-gateway';
 import { ClientesApiService } from './infraestructure/driven-adapter/clientes/clientes-api.service';
+import { horasGateway } from './domain/models/horas/gateway/horas-gateway';
+import { HorasApiService } from './infraestructure/driven-adapter/horas/horas-api.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,6 +36,7 @@ export const appConfig: ApplicationConfig = {
     { provide: clientesGateway, useClass: ClientesApiService},
     { provide: choferesGateway, useClass: ChoferesApiService },
     { provide: tipoDocumentoGateway, useClass: TipoDocumentoApiService },
+    { provide: horasGateway, useClass: HorasApiService },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {provide:HTTP_INTERCEPTORS,useClass:ClienteInterceptorService,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptorService,multi:true},

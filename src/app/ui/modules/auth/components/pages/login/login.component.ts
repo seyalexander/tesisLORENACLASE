@@ -4,11 +4,18 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../../../infraestructure/driven-adapter/login/auth.service';
 import { LoginRequest } from '../../../../../../domain/models/login/login-request';
 import { CommonModule } from '@angular/common';
+import { AlertaLoginComponent } from '../../../../../shareds/components/organisms/alerts/alerta-login/alerta-login.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AlertaLoginComponent
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -56,5 +63,10 @@ export class LoginComponent implements OnInit{
       this.loginForm.markAllAsTouched();
       alert("Error al ingresar los datos.");
     }
+  }
+
+  alertaServer: boolean = false
+  showEstado () {
+    this.alertaServer = !this.alertaServer
   }
 }

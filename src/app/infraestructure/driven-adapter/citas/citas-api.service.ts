@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { citasGateway } from '../../../domain/models/citas/gateway/citas-gateway';
-import { Observable } from 'rxjs';
+import { Observable, timeout } from 'rxjs';
 import { citasModel } from '../../../domain/models/citas/citas.model';
 import { environment } from '../../../../environments/environment.development';
 
@@ -17,7 +17,9 @@ export class CitasApiService extends citasGateway {
   }
 
   override newCita(citas: citasModel): Observable<Object> {
-    return this.httpClient.post(`${this.URL}/InsertarCitas`, citas)
+    return this.httpClient.post(`${this.URL}/InsertarCitas`, citas).pipe(
+      timeout(3000)
+    )
   }
 
   override getByIdUnique(id: number): Observable<citasModel> {

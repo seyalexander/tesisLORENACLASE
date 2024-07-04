@@ -1,8 +1,8 @@
+import { horasModel } from './../../../../../domain/models/horas/horas.model';
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
-import { Subscription } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 import { GetAutosUseCases } from '../../../../../domain/use-case/get-autos-use-case';
 import { MensajeDatosIncorrectosComponent } from '../../../../shareds/components/validadores/mensaje-datos-incorrectos/mensaje-datos-incorrectos.component';
 import { GetCitasUseCase } from '../../../../../domain/use-case/get-citas-use-case';
@@ -11,6 +11,9 @@ import { AuthService } from '../../../../../infraestructure/driven-adapter/login
 import { citasModel } from '../../../../../domain/models/citas/citas.model';
 import { autosModel } from '../../../../../domain/models/autos/autos.model';
 import { choferesModel } from '../../../../../domain/models/choferes/choferes.model';
+import { mensajeValidacionRegistroCorrecto, mensajeValidacionRegistroIncorrecto } from '../../../../../infraestructure/mappers/maps/alerts/sweetAlert';
+import Swal from 'sweetalert2';
+import { GetHorasUseCases } from '../../../../../domain/use-case/get-horas-use-case';
 
 
 @Component({
@@ -26,6 +29,8 @@ export class RegistrarCitaPageComponent {
   userNombre: String = ''
   userLoginOn : boolean = false;
   userLoginId : number = 0;
+  mensajeRegistro: String = 'Cita creada correctamente'
+  mensajeRegistroIncorrecto: String = 'Algo falló en el registro'
 
 //============================================================================
   // OCULTAR MODAL DESDE LA PANTALLA DE REGISTRO
@@ -49,7 +54,8 @@ export class RegistrarCitaPageComponent {
     private _tokenLogin: AuthService,
     private _getChoferesUseCase: GetChoferesUseCases,
     private loginService: AuthService,
-    private _getAutosUseCase: GetAutosUseCases
+    private _getAutosUseCase: GetAutosUseCases,
+    private _getHorasUseCase: GetHorasUseCases
   ) { }
 
   cita: citasModel = new citasModel();
@@ -85,6 +91,7 @@ export class RegistrarCitaPageComponent {
     })
 
     this.obtenerChoferesExito()
+    this.obtenerHorasExito()
 
     this.formularioRegistro = new FormGroup({
       tipo_Consulta: new FormControl('', [
@@ -144,7 +151,26 @@ export class RegistrarCitaPageComponent {
     this.choferesSubscription = this._getChoferesUseCase
     .getAllChoferes()
     .subscribe((Response: choferesModel[]) => {
+        console.log(Response);
+
         this.datosChofereslista = Response;
+      })
+  }
+
+  //============================================================================
+  // MOSTRAR LISTADO HORAS - DESPLEGABLE
+  //============================================================================
+
+  datosHoraslista: Array<horasModel> = [];
+  private horasSubscription: Subscription | undefined;
+
+  obtenerHorasExito(): void {
+    this.horasSubscription = this._getHorasUseCase
+    .getAllHoras()
+    .subscribe((Response: horasModel[]) => {
+        console.log(Response);
+
+        this.datosHoraslista = Response;
       })
   }
 
@@ -157,36 +183,58 @@ export class RegistrarCitaPageComponent {
     const horaValue = this.cita.hora;
     const horaConSegundos = horaValue.length === 5 ? horaValue + ':00' : horaValue;
     formValue.hora = horaConSegundos;
-    console.log('Datos a enviar:', formValue);
-    this._postCitasUseCase
-      .newCitas(formValue)
-      .subscribe((response: any) => {
-        this.cerrarComponente();
-        this.mensajeValidacionRegistroCorrecto(response);
-      });
+    console.log(formValue);
+
+    this._postCitasUseCase.newCitas(formValue).subscribe(
+      (response: any) => {
+        const setStatus =  response.status.toString().split(' ');
+
+        if (setStatus[0] === '200') {
+          this.cerrarComponente();
+          this.mensajeValidacionRegistroCorrecto(response);
+        } else {
+          this.cerrarComponente();
+          this.mensajeValidacionRegistroIncorrecto(response);
+        }
+      },
+      (error) => {
+        console.error('Error al enviar la cita:', error);
+        if (error.name === 'TimeoutError') {
+          // Manejo específico para errores de timeout
+          this.showFailureAlert('Timeout', 'Tiempo de espera agotado al enviar la cita.');
+        } else {
+          // Manejo de otros errores
+          this.mensajeValidacionRegistroIncorrecto(error);
+        }
+      }
+    );
   }
 
   //============================================================================
   // SWEETALERT
   //============================================================================
 
-  tituloSwalCorrecto: String = 'CONFIRMACIÓN';
   mensajeValidacionRegistroCorrecto(response: any) {
     const message = response && response.message ? response.message : 'Cita creada correctamente.';
-    Swal.fire(`${this.tituloSwalCorrecto}`, message, 'success').then(() => {
-      this.regresarListaTipoDocumento();
+    Swal.fire('CONFIRMACIÓN', message, 'success').then(() => {
+      window.location.reload();;
+    });
+  }
+
+  mensajeValidacionRegistroIncorrecto(response: any) {
+    const message = response && response.error.error ? response.error.error : 'Cita registrada incorrectamente';
+    Swal.fire('ERROR', message, 'error').then(() => {
+      window.location.reload();;
+    });
+  }
+
+  private showFailureAlert(title: string, message: string): void {
+    Swal.fire(title, message, 'error').then(() => {
+      window.location.reload();
     });
   }
 
 
-  //============================================================================
-  // RECARGAR PÁGINA
-  //============================================================================
-
-  regresarListaTipoDocumento() {
-    window.location.reload();
-    return this.refresh_token
-  }
 
   //============================================================================
   // DESTRCUCCIÓN DEL CARGADO DE DATOS
@@ -198,6 +246,9 @@ export class RegistrarCitaPageComponent {
     }
     if (this.choferesSubscription) {
       this.choferesSubscription.unsubscribe();
+    }
+    if(this.horasSubscription) {
+      this.horasSubscription.unsubscribe();
     }
   }
 

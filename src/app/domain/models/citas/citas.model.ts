@@ -11,3 +11,5 @@ export class citasModel {
   id_Chofer_Fk: choferesModel = {} as choferesModel
   estado: string = ''
 }
+
+

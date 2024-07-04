@@ -38,8 +38,9 @@ export class AuthService {
   login(credentials: LoginRequest): Observable<any> {
     return this.http.post<any>(environment.api + "/Login", credentials).pipe(
       tap((userData) => {
+        console.log(userData);
         sessionStorage.setItem("jwt", userData.jwt);
-        sessionStorage.setItem("clienteId", userData.cliente.toString());
+        sessionStorage.setItem("clienteId", userData.cliente);
         sessionStorage.setItem("clienteNombre", userData.cliente_razon);
         this.currentUserData.next(userData.jwt);
         this.currentUserIdClient.next(userData.cliente);
