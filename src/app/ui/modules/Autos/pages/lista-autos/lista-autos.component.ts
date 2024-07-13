@@ -111,7 +111,7 @@ export class ListaAutosComponent {
   showRegistro: boolean = false;
   mostrarComponente(): void {
     this.showRegistro = !this.showRegistro;
-    console.log(this.showRegistro);
+
   }
 
    //============================================================================

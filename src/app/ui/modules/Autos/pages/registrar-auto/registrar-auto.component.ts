@@ -96,8 +96,7 @@ export class RegistrarAutoComponent {
         Validators.required,
         Validators.minLength(2)
       ]),
-      AutoDb: new FormControl('', []),
-      AutoDbC: new FormControl('', [])
+      AutoDb: new FormControl(0, [])
     });
   }
 
@@ -135,12 +134,15 @@ export class RegistrarAutoComponent {
 
   public sendModeloAuto(): void {
     const formValue = this.Auto
-    this.Auto.idClienteFk.id_Cliente = this.userLoginId
-    console.log(this.Auto.idClienteFk.id_Cliente);
+    this.Auto.idClienteFk.idCliente = this.userLoginId
+    console.log(this.Auto.idClienteFk.idCliente);
+    const idModelo: number =  formValue.idModeloFk.id_Modelo
+    formValue.idModeloFk.id_Modelo = Number(idModelo)
+    formValue.idClienteFk.idCliente = this.Auto.idClienteFk.idCliente
+    console.log(formValue);
 
-    formValue.idClienteFk.id_Cliente = this.Auto.idClienteFk.id_Cliente
     this._postAutoUseCase
-      .newAuto(this.Auto)
+      .newAuto(formValue)
       .subscribe((response: any) => {
         this.cerrarComponenteAuto()
         this.mensajeValidacionRegistroCorrecto(response)

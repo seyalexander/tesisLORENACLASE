@@ -31,7 +31,6 @@
               <label for="dbMarcaAuto">Seleccionar modelo*:</label>
             </div>
             <select formControlName="AutoDb" [(ngModel)]="Auto.idModeloFk.id_Modelo"  name="demo" id="#">
-              <option value=""  disabled selected>Seleccionar</option>
               <option  *ngFor="let item of datosModeloAutoslista" [value]="item.id_Modelo">{{item.modelo}}</option>
             </select>
           </div>
