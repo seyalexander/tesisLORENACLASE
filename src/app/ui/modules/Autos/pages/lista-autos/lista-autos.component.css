@@ -3,7 +3,7 @@ article {
   box-sizing: border-box;
 }
 
-.modal-registro,
+/* .modal-registro,
 .modal-registroAuto {
   width: 100%;
   height: 100%;
@@ -15,7 +15,7 @@ article {
   justify-content: center;
   align-items: flex-start;
   padding-top: 24px;
-}
+} */
 
 
 .container-cita {

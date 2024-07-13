@@ -1,53 +1,98 @@
-<article class="container-registrar">
-  <div class="parte-superior">
-    <h2>REGISTRAR AUTO</h2>
-    <button (click)="cerrarComponenteAuto()">
-      <i class="uil uil-x"></i>
-    </button>
-  </div>
-  <div class="parte-inferior">
+<div
+  id="hs-sign-out-alert-small-window-auto"
+  class="overflow-hidden hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto"
+>
+  <!-- Card Section -->
+  <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <form (ngSubmit)="sendModeloAuto()" [formGroup]="formularioRegistro">
-      <div class="container-grupos">
-        <div class="grupo-inputs">
-          <div class="bg-input">
-            <div class="bg-label">
-              <label for="Auto">Auto*:</label>
-            </div>
-            <input
-              [autofocus]
-              formControlName="Auto"
-              type="text"
-              id="Auto"
-              name="Auto"
-              placeholder="Registrar cliente"
-              required
-              [(ngModel)]="Auto.matricula"
-            />
-          </div>
-        </div>
-        <div class="grupo-inputs">
-          <div class="bg-input">
-            <div class="bg-label">
-              <label for="dbMarcaAuto">Seleccionar modelo*:</label>
-            </div>
-            <select formControlName="AutoDb" [(ngModel)]="Auto.idModeloFk.id_Modelo"  name="demo" id="#">
-              <option  *ngFor="let item of datosModeloAutoslista" [value]="item.id_Modelo">{{item.modelo}}</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="opciones-form">
-        <button
-          class="btn btn-success"
-          role="button"
-          [disabled]="!formularioRegistro.valid"
+      <!-- Card -->
+      <div class="bg-white rounded-xl shadow dark:bg-neutral-900">
+        <div
+          class="relative h-40 rounded-t-xl bg-[url('https://preline.co/assets/svg/examples/abstract-bg-1.svg')] bg-no-repeat bg-cover bg-center"
         >
-          Guardar
-        </button>
+
+        </div>
+
+        <div class="pt-0 p-4 sm:pt-0 sm:p-7">
+          <!-- Grid -->
+          <div class="space-y-4 sm:space-y-6">
+            <div>
+              <label class="sr-only"> Product photo </label>
+
+              <div class="grid sm:flex sm:items-center sm:gap-x-5">
+                <img
+                  class="-mt-8 relative z-10 inline-block size-24 mx-auto sm:mx-0 rounded-full ring-4 ring-white dark:ring-neutral-900"
+                  src="../../../../../../assets/auto.png"
+                  alt="Image Description"
+                />
+
+                <div
+                  class="mt-4 sm:mt-auto sm:mb-1.5 flex justify-center sm:justify-start gap-2"
+                >
+                  <button
+                    type="button"
+                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+                  >
+                    REGISTRO AUTO
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label
+                for="af-submit-app-project-name"
+                class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200"
+              >
+                Matrícula
+              </label>
+
+              <input
+                formControlName="Auto"
+                [(ngModel)]="Auto.matricula"
+                id="af-submit-app-project-name"
+                type="text"
+                class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                placeholder="Ingresar matrícula"
+              />
+            </div>
+
+            <div class="space-y-2">
+              <label
+                for="af-submit-app-category"
+                class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200"
+              >
+                Modelo
+              </label>
+
+              <select
+                formControlName="AutoDb"
+                [(ngModel)]="Auto.idModeloFk.id_Modelo"
+                id="af-submit-app-category"
+                class="py-2 px-3 pe-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              >
+                <option selected>Seleccionar</option>
+                @for (item of datosModeloAutoslista; track $index) {
+                <option [value]="item.id_Modelo">{{ item.modelo }}</option>
+                }
+              </select>
+            </div>
+          </div>
+          <!-- End Grid -->
+
+          <div class="mt-5 flex justify-center gap-x-2">
+            <button
+              [disabled]="!formularioRegistro.valid"
+              type="submit"
+              class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+            >
+              Registrar
+            </button>
+          </div>
+        </div>
       </div>
+      <!-- End Card -->
     </form>
   </div>
-</article>
-
-
+  <!-- End Card Section -->
+</div>
