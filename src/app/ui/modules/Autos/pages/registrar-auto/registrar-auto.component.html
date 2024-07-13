@@ -9,9 +9,7 @@
       <div class="bg-white rounded-xl shadow dark:bg-neutral-900">
         <div
           class="relative h-40 rounded-t-xl bg-[url('https://preline.co/assets/svg/examples/abstract-bg-1.svg')] bg-no-repeat bg-cover bg-center"
-        >
-
-        </div>
+        ></div>
 
         <div class="pt-0 p-4 sm:pt-0 sm:p-7">
           <!-- Grid -->
@@ -81,6 +79,13 @@
           <!-- End Grid -->
 
           <div class="mt-5 flex justify-center gap-x-2">
+            <button
+              data-hs-overlay="#hs-sign-out-alert-small-window-auto"
+              type="button"
+              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+            >
+              Cancel
+            </button>
             <button
               [disabled]="!formularioRegistro.valid"
               type="submit"
