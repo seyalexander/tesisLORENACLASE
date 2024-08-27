@@ -1,0 +1,25 @@
+<body class="custom-bg min-h-screen flex flex-col items-center py-10 relative">
+
+  <div class="absolute top-4 left-4 flex items-center glass-effect p-3 rounded-full shadow-md">
+    <img [src]="loggedInUser.avatar" alt="User Avatar" class="w-10 h-10 rounded-full mr-3">
+    <span class="text-lg font-semibold text-white">{{ loggedInUser.username }}</span>
+  </div>
+
+  <button (click)="volverOpcionesClase()" class="absolute top-4 right-4 py-2 px-4 bg-white bg-opacity-30 text-white font-semibold rounded-full shadow-md hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-purple-500 glass-effect">
+    Back
+  </button>
+
+  <h1 class="text-4xl font-bold text-yellow-500 mb-10">Choose a flashcard</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full px-6">
+    <div *ngFor="let item of datosAudioslista" class="custom-card-bg p-6 rounded-lg shadow-lg flex flex-col items-center cursor-pointer transform hover:scale-105 transition-transform" (click)="reproducirAudio(item.audioFileType)">
+      <img src="https://img.freepik.com/foto-gratis/personaje-dibujos-animados-3d_23-2151021951.jpg?w=740&t=st=1721970629~exp=1721971229~hmac=34636ad2e1c093c5ea2e4f8d607497a9a38ac1da229a7d21359135735b3eda43" alt="Imagen 1" class="w-32 h-32 mb-4 rounded-full">
+    </div>
+  </div>
+
+  <!-- Reproductor de Audio -->
+  <audio #audioPlayer controls>
+    <source [src]="audioSource" type="audio/mpeg">
+  </audio>
+
+</body>

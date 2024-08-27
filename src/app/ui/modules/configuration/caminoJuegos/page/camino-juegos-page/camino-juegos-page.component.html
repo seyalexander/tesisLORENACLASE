@@ -1,0 +1,28 @@
+<div class="bg-gradient-to-r from-purple-900 via-purple-700 to-purple-500 min-h-screen flex flex-col items-center py-10">
+  <div class="w-full max-w-3xl p-4 bg-white bg-opacity-10 rounded-lg shadow-lg flex justify-between items-center mb-10 glass-effect relative z-10">
+    <h2 class="text-3xl font-bold text-purple-100">Hi, <span class="text-pink-300">{{ username }}</span></h2>
+    <button (click)="volverHome()" class="py-3 px-6 bg-pink-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500">Back</button>
+  </div>
+
+  <div class="relative w-full max-w-full flex items-center justify-center">
+    <!-- Imagen del mapa -->
+    <img src="https://img.freepik.com/vector-gratis/mar-playa-vista-superior-fondo-oceano-costa_107791-7000.jpg?t=st=1721963710~exp=1721967310~hmac=0dcb9a257c442cf99740636384cbd9854f82e4226c3ae414b32198d85e35dba4&w=826"
+         alt="Mapa de niveles" class="w-full h-auto object-cover">
+
+    <!-- Vértices de los niveles -->
+    <div *ngFor="let level of levels; let i = index"
+         class="absolute cursor-pointer transition-transform transform hover:scale-110"
+         [ngStyle]="{ top: level.y + '%', left: level.x + '%', transform: 'translate(-50%, -50%)' }"
+         (click)="navigateToLevel(level)">
+      <div class="level-icon-container">
+        <img [src]="level.icon" alt="Nivel {{ i+1 }}" class="level-icon">
+        <div *ngIf="!level.available" class="lock-icon">
+          <i class="fas fa-lock fa-2x"></i>
+        </div>
+        <div class="level-info">
+          <span class="level-name">{{ level.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

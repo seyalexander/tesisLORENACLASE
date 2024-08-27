@@ -1,0 +1,22 @@
+<div class="bg-gradient-to-r from-purple-900 via-purple-700 to-purple-500 min-h-screen flex flex-col items-center justify-center py-10 relative">
+  <!-- Título de la página -->
+  <div class="w-full max-w-3xl p-4 bg-white bg-opacity-10 rounded-lg shadow-lg flex justify-between items-center mb-10 glass-effect relative z-10">
+    <h2 class="text-3xl font-bold text-purple-100">Hi, <span class="text-pink-300">{{ username }}</span> choose an option</h2>
+    <button  (click)="salir()" class="py-3 px-6 bg-pink-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500">Logout</button>
+  </div>
+
+  <!-- Contenedor para las opciones -->
+  <div class="relative w-full max-w-6xl flex flex-col md:flex-row items-center justify-between">
+    <!-- Opción Clase -->
+    <div class="option-container class-container">
+      <div class="option-background class-background"></div>
+      <button (click)="opcionesClase()" class="option-button class-button">Join a class</button>
+    </div>
+
+    <!-- Opción Aventura -->
+    <div class="option-container adventure-container">
+      <div class="option-background adventure-background"></div>
+      <button (click)="aventuras()" class="option-button adventure-button">Adventure mode</button>
+    </div>
+  </div>
+</div>

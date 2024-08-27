@@ -42,10 +42,12 @@ export class LoginComponent implements OnInit{
   }
 
   login(){
+
     if(this.loginForm.valid){
       this.loginError="";
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData: any) => {
+          console.log(userData);
 
         },
         error: (errorData:any) => {
@@ -58,8 +60,7 @@ export class LoginComponent implements OnInit{
         }
       })
 
-    }
-    else{
+    }else{
       this.loginForm.markAllAsTouched();
       alert("Error al ingresar los datos.");
     }

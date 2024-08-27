@@ -1,0 +1,31 @@
+<body class="custom-bg min-h-screen flex flex-col items-center py-10 relative">
+  <div class="absolute top-4 left-4 flex items-center glass-effect p-3 rounded-full shadow-md">
+    <img [src]="loggedInUser.avatar" alt="User Avatar" class="w-10 h-10 rounded-full mr-3">
+    <span class="text-lg font-semibold text-white">{{ loggedInUser.username }}</span>
+  </div>
+
+  <button (click)="volverHome()" class="absolute top-4 right-4 py-2 px-4 bg-white bg-opacity-30 text-white font-semibold rounded-full shadow-md hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-purple-500 glass-effect">
+    Back
+  </button>
+
+  <h1 class="text-4xl font-bold text-yellow-500 mb-10">Choose an activity</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full px-6">
+    <div (click)="actividadSonidos()" class="custom-card-bg p-6 rounded-lg shadow-lg flex flex-col items-center cursor-pointer transform hover:scale-105 transition-transform">
+      <img [src]="activities1.image" alt="{{ activities1.name }}" class="w-32 h-32 mb-4 rounded-full">
+      <p class="text-lg font-semibold text-gray-700">{{ activities1.name }}</p>
+    </div>
+    <div class="custom-card-bg p-6 rounded-lg shadow-lg flex flex-col items-center cursor-pointer transform hover:scale-105 transition-transform">
+      <img [src]="activities2.image" alt="{{ activities2.name }}" class="w-32 h-32 mb-4 rounded-full">
+      <p class="text-lg font-semibold text-gray-700">{{ activities2.name }}</p>
+    </div>
+    <div class="custom-card-bg p-6 rounded-lg shadow-lg flex flex-col items-center cursor-pointer transform hover:scale-105 transition-transform">
+      <img [src]="activities3.image" alt="{{ activities3.name }}" class="w-32 h-32 mb-4 rounded-full">
+      <p class="text-lg font-semibold text-gray-700">{{ activities3.name }}</p>
+    </div>
+    <div (click)="actividadCanva()"  class="custom-card-bg p-6 rounded-lg shadow-lg flex flex-col items-center cursor-pointer transform hover:scale-105 transition-transform">
+      <img [src]="activities4.image" alt="{{ activities4.name }}" class="w-32 h-32 mb-4 rounded-full">
+      <p class="text-lg font-semibold text-gray-700">{{ activities4.name }}</p>
+    </div>
+  </div>
+</body>

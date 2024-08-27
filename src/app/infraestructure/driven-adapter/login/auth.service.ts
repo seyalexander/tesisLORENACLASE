@@ -3,18 +3,20 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { LoginRequest } from '../../../domain/models/login/login-request';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentUserData: BehaviorSubject<String> = new BehaviorSubject<String>("");
   currentUserNombre: BehaviorSubject<String> = new BehaviorSubject<String>("");
   currentUserIdClient: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     const token = sessionStorage.getItem("jwt");
     const clienteId = sessionStorage.getItem("clienteId");
     const clienteNombre = sessionStorage.getItem("clienteNombre");
@@ -61,6 +63,7 @@ export class AuthService {
     this.currentUserIdClient.next(0);
     this.currentUserNombre.next("");
     this.currentUserLoginOn.next(false);
+    this.router.navigateByUrl('/');
     console.log("Logout completed. Current state:");
     console.log("currentUserData:", this.currentUserData.value);
     console.log("currentUserIdClient:", this.currentUserIdClient.value);

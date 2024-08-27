@@ -1,62 +1,36 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+.custom-bg {
+  background: radial-gradient(circle, #1b004b 20%, #4c007d 60%, #7f00b2 100%);
+  min-height: 100vh;
 }
-
-/* Container for the form */
-.login-container {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+.custom-card-bg {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-
-/* Form fields styling */
-.login-container .form-control {
-  border-radius: 5px;
-  margin-top: 5px;
+.text-primary {
+  /* color: #1b004b; */
+  color: #fff;
 }
-
-/* Labels styling */
-.login-container .form-label {
-  font-weight: bold;
-  color: #333333;
+.text-accent {
+  color: #f988ff;
 }
-
-/* Error messages styling */
-.text-danger {
-  font-size: 0.875em;
-  margin-top: 5px;
+.bg-accent {
+  background-color: #7f00b2;
 }
-
-/* Button styling */
-.login-container .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 1em;
-  margin-top: 20px;
+.focus\:ring-accent:focus {
+  box-shadow: 0 0 0 2px #7f00b2;
 }
-
-.login-container .btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #004085;
-}
-
-/* Additional styles for better alignment */
-.mb-3 {
-  margin-bottom: 15px;
-}
-
-#exampleInputEmail1, #exampleInputPassword1 {
-  margin-bottom: 5px;
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  .logo-container {
+    padding-right: 0;
+    margin-bottom: 1rem;
+  }
+  .login-container {
+    margin-left: 0;
+  }
 }

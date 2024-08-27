@@ -6,15 +6,16 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TokenService implements HttpInterceptor{
+export class TokenService implements HttpInterceptor {
 
-  constructor(private loginService:AuthService) { }
+  constructor(private loginService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let token:String=this.loginService.userToken;
+    let token: String = this.loginService.userToken;
+    console.log(token);
 
-    if (token!=""){
-      req=req.clone(
+    if (token != "") {
+      req = req.clone(
         {
           setHeaders: {
             'Content-Type': 'application/json; charset=utf-8',
@@ -25,5 +26,5 @@ export class TokenService implements HttpInterceptor{
       );
     }
     return next.handle(req);
-}
+  }
 }

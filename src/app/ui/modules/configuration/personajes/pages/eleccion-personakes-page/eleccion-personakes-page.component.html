@@ -1,0 +1,32 @@
+<div class="bg-gradient-to-r from-purple-900 via-purple-700 to-purple-500 min-h-screen flex flex-col items-center justify-center py-10 relative">
+  <div class="absolute right-0 top-0 h-full w-full flex items-center justify-end">
+    <div class="avatar-background">
+      <img  [src]="listaAvatares[currentIndex].url" [alt]="listaAvatares[currentIndex].nombre" class="avatar-image">
+    </div>
+  </div>
+
+  <div class="w-full max-w-3xl p-4 bg-white bg-opacity-10 rounded-lg shadow-lg flex justify-between items-center mb-10 glass-effect relative z-10">
+    <button  (click)="volverHome()"  class="py-3 px-6 bg-pink-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500">Back</button>
+    <h2 class="text-3xl font-bold text-purple-100">Hi, <span class="text-pink-300">{{ username }}</span></h2>
+    <button (click)="mapa()" class="py-3 px-6 bg-pink-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500">Play</button>
+  </div>
+
+  <h1 class="text-5xl font-bold text-white mb-10 relative z-10">Choose your avatar</h1>
+
+  <div class="relative flex items-center justify-center mb-10 z-10">
+    <button (click)="prevAvatar()" class="p-3 text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-500 transition-transform transform hover:scale-110 mx-4">
+      <i class="fas fa-chevron-left fa-2x"></i>
+    </button>
+
+    <div id="avatar-container" class="relative flex flex-col items-center cursor-pointer transition-transform transform hover:scale-105 glass-effect p-6 rounded-full">
+      <img [src]="listaAvatares[currentIndex].url" [alt]="listaAvatares[currentIndex].nombre" class="w-48 h-48 mb-4 rounded-full border-4 border-white shadow-lg">
+      <p class="text-2xl font-semibold text-white bg-purple-700 bg-opacity-70 px-6 py-2 rounded-full">{{ listaAvatares[currentIndex].nombre }}</p>
+    </div>
+
+    <button (click)="nextAvatar()" class="p-3 text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-500 transition-transform transform hover:scale-110 mx-4">
+      <i class="fas fa-chevron-right fa-2x"></i>
+    </button>
+  </div>
+
+  <button (click)="selectAvatar()" class="py-3 px-10 bg-pink-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-transform transform hover:scale-105 z-10">Select</button>
+</div>
