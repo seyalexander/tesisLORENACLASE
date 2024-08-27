@@ -5,6 +5,7 @@ import { AuthService } from '../../../../../../infraestructure/driven-adapter/lo
 import { AvataresService } from '../../../../../../infraestructure/driven-adapter/avatares/avatares.service';
 import { TokenService } from '../../../../../../infraestructure/driven-adapter/login/token.service';
 import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-nivel4',
@@ -54,7 +55,8 @@ export class Nivel4Component {
     private router: Router,
     private loginService: AuthService,
     private _avatares: AvataresService,
-    private token: TokenService
+    private token: TokenService,
+    private http: HttpClient
   ) {}
 
   avatars = [
@@ -144,5 +146,41 @@ export class Nivel4Component {
 
   mapa(): void {
     this.router.navigateByUrl('/home/mapa');
+  }
+
+
+  saveImage() {
+    const canvas = this.canvas;
+    const imageDataUrl = canvas.toDataURL('image/png');
+
+    // Convertimos la URL de datos base64 a un archivo Blob
+    const blob = this.dataURLtoBlob(imageDataUrl);
+    const formData = new FormData();
+    formData.append('image', blob, 'drawing.png');
+
+    // Aquí envías la imagen a tu API
+    this.http.post('https://tu-api.com/endpoint', formData).subscribe(
+      response => {
+        console.log('Imagen guardada exitosamente', response);
+      },
+      error => {
+        console.error('Error al guardar la imagen', error);
+      }
+    );
+  }
+
+  // Función para convertir base64 a Blob
+  private dataURLtoBlob(dataUrl: string): Blob {
+    const arr = dataUrl.split(',');
+    const mime = arr[0].match(/:(.*?);/)![1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new Blob([u8arr], { type: mime });
   }
 }
