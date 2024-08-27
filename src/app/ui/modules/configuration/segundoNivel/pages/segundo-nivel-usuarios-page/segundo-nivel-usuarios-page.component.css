@@ -1,81 +1,7 @@
-.bg-gradient-to-r {
-  background: linear-gradient(to right, #1b004b, #4c007d, #7f00b2);
-}
-
-.min-h-screen {
-  min-height: 100vh;
-}
-
-.flex {
-  display: flex;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.py-10 {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.max-w-6xl {
-  max-width: 72rem;
-}
-
-.p-4 {
-  padding: 1rem;
-}
-
-.image-card {
-  width: 8rem;
-  height: 8rem;
-  border: 2px solid #ffffff;
-  border-radius: 0.5rem;
-  margin: 1rem;
-  cursor: pointer;
-}
-
-.drop-zone-container {
-  position: relative;
-  width: 100%;
-}
-
 .drop-zone {
-  border: 2px dashed #ffffff;
-  border-radius: 0.5rem;
-  padding: 2rem;
-  margin: 1rem;
-  width: 100%;
-  min-height: 8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
-  position: relative;
-  transition: border-color 0.3s ease;
-}
-
-.drop-zone.correct-match {
-  border-color: #28a745; /* Verde para el borde correcto */
-}
-
-.word-card {
-  width: 100%;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente para drop-zone */
+  position: relative; /* Necesario para posicionar la imagen encima */
+  min-height: 8rem; /* Ajusta la altura mínima para las zonas de caída */
 }
 
 .matched-image {
@@ -83,20 +9,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 8rem;
-  height: 8rem;
-  z-index: 1; /* Asegura que la imagen esté encima del texto */
+  width: 6rem; /* Tamaño ajustado de la imagen emparejada */
+  height: 6rem; /* Tamaño ajustado de la imagen emparejada */
+  z-index: 10; /* Asegura que la imagen esté encima del texto */
+  object-fit: cover;
 }
 
-.text-5xl {
-  font-size: 3rem;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-@font-face {
-  font-family: 'Press Start 2P';
-  src: url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* Mantener fondo del drop-zone visible */
+.word-card {
+  position: relative;
+  z-index: 1; /* Asegura que el texto esté debajo de la imagen */
 }

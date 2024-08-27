@@ -16,10 +16,10 @@
       <p class="text-lg font-semibold text-gray-700">{{ activities1.name }}</p>
     </div>
     <div class="custom-card-bg p-6 rounded-lg shadow-lg flex flex-col items-center cursor-pointer transform hover:scale-105 transition-transform">
-      <img [src]="activities2.image" alt="{{ activities2.name }}" class="w-32 h-32 mb-4 rounded-full">
+      <img  [src]="activities2.image" alt="{{ activities2.name }}" class="w-32 h-32 mb-4 rounded-full">
       <p class="text-lg font-semibold text-gray-700">{{ activities2.name }}</p>
     </div>
-    <div class="custom-card-bg p-6 rounded-lg shadow-lg flex flex-col items-center cursor-pointer transform hover:scale-105 transition-transform">
+    <div (click)="actividadEnlazar()" class="custom-card-bg p-6 rounded-lg shadow-lg flex flex-col items-center cursor-pointer transform hover:scale-105 transition-transform">
       <img [src]="activities3.image" alt="{{ activities3.name }}" class="w-32 h-32 mb-4 rounded-full">
       <p class="text-lg font-semibold text-gray-700">{{ activities3.name }}</p>
     </div>

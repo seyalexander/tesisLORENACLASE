@@ -161,10 +161,10 @@ export class Nivel4Component {
     // Aquí envías la imagen a tu API
     this.http.post('https://tu-api.com/endpoint', formData).subscribe(
       response => {
-        console.log('Imagen guardada exitosamente', response);
+        alert(`Imagen guardada exitosamente ${response}` );
       },
       error => {
-        console.error('Error al guardar la imagen', error);
+        alert(`Error al guardar la imagen' ${error}` );
       }
     );
   }
@@ -182,5 +182,14 @@ export class Nivel4Component {
     }
 
     return new Blob([u8arr], { type: mime });
+  }
+
+  loggedInUser = {
+    username: 'Almendra',
+    avatar: 'https://img.freepik.com/foto-gratis/personaje-dibujos-animados-3d_23-2151021951.jpg?w=740&t=st=1721970629~exp=1721971229~hmac=34636ad2e1c093c5ea2e4f8d607497a9a38ac1da229a7d21359135735b3eda43'
+  };
+
+  volverOpcionesClase(): void {
+    this.router.navigateByUrl('/home/opcionesClase');
   }
 }

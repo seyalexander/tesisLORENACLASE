@@ -7,6 +7,7 @@ import { OpcionesPagesComponent } from './ui/modules/configuration/opciones/page
 import { CaminoJuegosPageComponent } from './ui/modules/configuration/caminoJuegos/page/camino-juegos-page/camino-juegos-page.component';
 import { OpcionesClaseComponent } from './ui/modules/configuration/opcionesClase/page/opciones-clase/opciones-clase.component';
 import { PrimerNivelUsuariosPageComponent } from './ui/modules/configuration/primerNivel/pages/primer-nivel-usuarios-page/primer-nivel-usuarios-page.component';
+import { SegundoNivelUsuariosPageComponent } from './ui/modules/configuration/segundoNivel/pages/segundo-nivel-usuarios-page/segundo-nivel-usuarios-page.component';
 
 
 export const routes: Routes = [
@@ -41,6 +42,11 @@ export const routes: Routes = [
         path: 'actividad1',
         pathMatch: 'full',
         component: PrimerNivelUsuariosPageComponent,
+      },
+      {
+        path: 'actividad2',
+        pathMatch: 'full',
+        component: SegundoNivelUsuariosPageComponent,
       },
       {
         path: 'actividad4',

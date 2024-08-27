@@ -1,19 +1,35 @@
-<div class="drawing-container">
+<div class="drawing-container relative min-h-screen bg-gradient-to-r from-purple-900 via-purple-700 to-purple-500 flex flex-col items-center py-10">
+  <!-- Encabezado del Usuario -->
+  <div class="absolute top-4 left-4 flex items-center glass-effect p-3 rounded-full shadow-md">
+    <img [src]="loggedInUser.avatar" alt="User Avatar" class="w-10 h-10 rounded-full mr-3">
+    <span class="text-lg font-semibold text-white">{{ loggedInUser.username }}</span>
+  </div>
+
+  <!-- Botón de Salir -->
+  <button
+    (click)="volverOpcionesClase()"
+    class="absolute top-4 right-4 py-2 px-4 bg-white bg-opacity-30 text-white font-semibold rounded-full shadow-md hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-purple-500 glass-effect">
+    Back
+  </button>
+
+  <!-- Contenido de Dibujo -->
   <div class="absolute right-0 top-0 h-full w-full flex items-center justify-end">
     <div class="avatar-background">
-      <img  [src]="listaAvatares[currentIndex].url" [alt]="listaAvatares[currentIndex].nombre" class="avatar-image">
+      <img [src]="listaAvatares[currentIndex].url" [alt]="listaAvatares[currentIndex].nombre" class="avatar-image">
     </div>
   </div>
   <div class="contenedor">
     <div class="w-full max-w-3xl p-4 bg-white bg-opacity-10 rounded-lg shadow-lg flex flex-col justify-between items-center mb-10 glass-effect relative z-10">
-      <h4 class=" font-semibold text-purple-100">Instruction <span class="text-pink-300">Draw an</span></h4>
+      <h4 class="font-semibold text-purple-100">Instruction <span class="text-pink-300">Draw an</span></h4>
       <h2 class="text-3xl font-bold text-purple-100"><span class="text-white">APPLE</span></h2>
-
     </div>
 
     <canvas id="drawingCanvas" width="800" height="600"></canvas>
 
-    <button   (click)="saveImage()" class="mt-4 items-center justify-center w-80 py-3 px-6 bg-pink-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500">Save</button>
+    <button
+      (click)="saveImage()"
+      class="mt-4 items-center justify-center w-80 py-3 px-6 bg-pink-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500">
+      Save
+    </button>
   </div>
-
 </div>

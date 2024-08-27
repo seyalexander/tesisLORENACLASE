@@ -3,6 +3,8 @@ import { Clase1Model } from '../../../../../../domain/models/clase1/clase.modul'
 import { Clase1Service } from '../../../../../../infraestructure/driven-adapter/clase1/clase1.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../../../infraestructure/driven-adapter/login/auth.service';
 
 @Component({
   selector: 'app-primer-nivel-usuarios-page',
@@ -24,7 +26,11 @@ export class PrimerNivelUsuariosPageComponent {
 
   private audiosSubscription: Subscription | undefined;
 
-  constructor(private _getAudiosUseCase: Clase1Service) {}
+  constructor(
+    private _getAudiosUseCase: Clase1Service,
+    private router: Router,
+    private _login: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.listarAudios();
@@ -48,6 +54,6 @@ export class PrimerNivelUsuariosPageComponent {
   }
 
   volverOpcionesClase(): void {
-    // Implementa la lógica para volver a la página de opciones
+    this.router.navigateByUrl('/home/opcionesClase');
   }
 }
