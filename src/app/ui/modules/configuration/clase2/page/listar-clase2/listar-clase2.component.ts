@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../../../infraestructure/driven-adapter/login/auth.service';
 import { Clase2Service } from '../../../../../../infraestructure/driven-adapter/clase2/clase2.service';
+import { clase2respuestaModel } from '../../../../../../domain/models/clase2/clase2respuesta.model';
+import { alumnoModel } from '../../../../../../domain/models/alumno/alumno.model';
 
 @Component({
   selector: 'app-listar-clase2',
@@ -23,6 +25,10 @@ export class ListarClase2Component {
 
   datosAudioslista: Clase2Model[] = [];
   audioSource: string | undefined;
+  opcionesMezcladas: string[] = [];
+  mostrarModal: boolean = false;
+  respuestaSeleccionada: string = '';
+  correcta: string = '';
 
   private audiosSubscription: Subscription | undefined;
 
@@ -36,21 +42,76 @@ export class ListarClase2Component {
     this.listarAudios();
   }
 
+  ngAfterViewInit(): void {
+    // Asegúrate de que el audio se cargue después de la vista esté inicializada
+    if (this.audioSource) {
+      this.reproducirAudio();
+    }
+  }
+
   listarAudios() {
     this.audiosSubscription = this._getAudiosUseCase.getAllClase2().subscribe((response: Clase2Model[]) => {
       this.datosAudioslista = response;
-      console.log(this.datosAudioslista);
+      if (this.datosAudioslista.length > 0) {
+        const item = this.datosAudioslista[this.datosAudioslista.length - 1];
+        this.audioSource = this.formatDropboxUrl(item.audio);
+        this.mezclarOpciones(item);
+        this.reproducirAudio();
+        console.log(this.audioSource);
+
+      }
     });
   }
 
-  reproducirAudio(audioUrl: string): void {
-    // Asegúrate de que el enlace de Dropbox esté en formato de descarga directa
-    const directDownloadUrl = audioUrl.replace('dl=0', 'dl=1');
-    this.audioSource = directDownloadUrl;
+  mezclarOpciones(item: Clase2Model) {
+    const opciones = [item.opcion1, item.opcion2, item.opcion3, item.opcion4];
+    this.opcionesMezcladas = this.shuffleArray(opciones);
+    this.correcta = item.correcta; // Guardar la respuesta correcta
+  }
+
+  shuffleArray(array: string[]): string[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  formatDropboxUrl(url: string): string {
+    return url.replace('dl=0', 'dl=1');
+  }
+
+  reproducirAudio(): void {
     const audioElement = this.audioPlayer.nativeElement;
-    audioElement.src = this.audioSource;
-    audioElement.load();
-    audioElement.play();
+    if (this.audioSource) {
+      audioElement.src = this.audioSource;
+      audioElement.load();
+      audioElement.play();
+    }
+  }
+
+  verificarRespuesta(opcionSeleccionada: string): void {
+    this.respuestaSeleccionada = opcionSeleccionada;
+    const respuesta = opcionSeleccionada === this.correcta ? 'correcta' : 'incorrecta';
+
+    // Aquí llamas a la función para guardar la respuesta
+    this.saveRespuesta(respuesta);
+
+    // Mostrar modal de respuesta enviada
+    this.mostrarModal = true;
+  }
+
+  saveRespuesta(respuesta: string): void {
+    const respuestaModel = new clase2respuestaModel();
+    respuestaModel.idclaserespuestasctividad1 = 1; // O el ID correcto
+    respuestaModel.respuesta = respuesta;
+    respuestaModel.idalumnofk = {} as alumnoModel; // O el alumno correcto
+
+    // Suponiendo que tienes un servicio para enviar la respuesta
+    this._getAudiosUseCase.saveClase2(respuestaModel).subscribe(() => {
+      // Redirigir a otra página o realizar cualquier otra acción después de guardar
+      this.volverOpcionesClase();
+    });
   }
 
   volverOpcionesClase(): void {

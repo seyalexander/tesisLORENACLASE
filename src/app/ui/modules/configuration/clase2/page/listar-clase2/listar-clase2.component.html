@@ -22,11 +22,23 @@
 
   <!-- Grid de Flashcards -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full px-6 z-10">
-    <div *ngFor="let item of datosAudioslista"
-      class="custom-card-bg p-6 rounded-lg shadow-lg flex flex-col items-center cursor-pointer transform hover:scale-105 transition-transform">
+    <div
+      *ngFor="let opcion of opcionesMezcladas"
+      class="custom-card-bg p-6 rounded-lg shadow-lg flex flex-col items-center cursor-pointer transform hover:scale-105 transition-transform"
+      (click)="verificarRespuesta(opcion)">
       <img src="https://img.freepik.com/foto-gratis/personaje-dibujos-animados-3d_23-2151021951.jpg?w=740&t=st=1721970629~exp=1721971229~hmac=34636ad2e1c093c5ea2e4f8d607497a9a38ac1da229a7d21359135735b3eda43"
-        alt="Imagen 1"
+        alt="Imagen"
         class="w-32 h-32 mb-4 rounded-full">
+      <h2>{{ opcion }}</h2>
+    </div>
+  </div>
+
+  <!-- Modal de Respuesta Enviada -->
+  <div *ngIf="mostrarModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-lg font-bold mb-4">Respuesta Enviada</h2>
+      <p class="mb-4">Tu respuesta {{ respuestaSeleccionada }} ha sido enviada.</p>
+      <button (click)="volverOpcionesClase()" class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-full hover:bg-blue-600">Aceptar</button>
     </div>
   </div>
 </body>
