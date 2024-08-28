@@ -1,5 +1,13 @@
+import { alumnoModel } from "../alumno/alumno.model"
+import { audioModel } from "../audio/audio.model"
+
 export class clase4Model {
-  clase4_id: number = 0
-  clase4_imagen: string = ''
-  clase4_audio: string = ''
+  idclaserespuestasctividad3: number = 0
+  imagen: string = ''
+  idalumnofk:  alumnoModel = {} as alumnoModel
+  idaudiosactividad3fk: audioModel = {} as audioModel
+
+  constructor(imagen: string) {
+    this.imagen = imagen;
+  }
 }

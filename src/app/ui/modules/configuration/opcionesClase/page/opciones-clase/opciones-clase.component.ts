@@ -48,6 +48,10 @@ export class OpcionesClaseComponent {
     this.router.navigateByUrl('/home/actividad4');
   }
 
+  actividadElegir(): void {
+    this.router.navigateByUrl('/home/actividad3');
+  }
+
   actividadEnlazar(): void{
     this.router.navigateByUrl('/home/actividad2');
     console.log("actividad 2");

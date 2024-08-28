@@ -1,11 +1,14 @@
 import { Router, RouterModule } from '@angular/router';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { avatarModel } from '../../../../../../domain/models/avatares/avatar.model';
 import { AuthService } from '../../../../../../infraestructure/driven-adapter/login/auth.service';
 import { AvataresService } from '../../../../../../infraestructure/driven-adapter/avatares/avatares.service';
 import { TokenService } from '../../../../../../infraestructure/driven-adapter/login/token.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Clase4Service } from '../../../../../../infraestructure/driven-adapter/clase4/clase4.service';
+import { clase4Model } from '../../../../../../domain/models/clase4/clase4.model';
+import { audioModel } from '../../../../../../domain/models/audio/audio.model';
 
 @Component({
   selector: 'app-nivel4',
@@ -19,11 +22,34 @@ export class Nivel4Component {
   private ctx!: CanvasRenderingContext2D;
   private drawing: boolean = false;
 
+  userNombre: String = ''
+  userLoginOn : boolean = false;
+  userLoginId : number  = 0 ;
+
+  private loginService = inject(AuthService);
+
   ngOnInit() {
     this.canvas = document.getElementById('drawingCanvas') as HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d')!;
 
     this.datosLogin()
+    this.obtenerAudios()
+
+    this.loginService.currentUserLoginOn.subscribe({
+      next:(userLoginOn) => {
+
+        this.userLoginOn = userLoginOn;
+        this.loginService.currentUserIdClient.subscribe({
+          next: (userLoginId) => {
+            this.userLoginId = userLoginId;
+
+            if (userLoginId != 0 || userLoginId != null) {
+
+            }
+          }
+        })
+      }
+    })
   }
 
   @HostListener('mousedown', ['$event'])
@@ -53,10 +79,10 @@ export class Nivel4Component {
   listaAvatares: Array<avatarModel> = []
   constructor(
     private router: Router,
-    private loginService: AuthService,
     private _avatares: AvataresService,
     private token: TokenService,
-    private http: HttpClient
+    private http: HttpClient,
+    private _clase4: Clase4Service
   ) {}
 
   avatars = [
@@ -81,6 +107,33 @@ export class Nivel4Component {
     })
   }
 
+  listaAudios: Array<audioModel> = []
+  private ausdiosSubscribe: Subscription | undefined
+  obtenerAudios(): void {
+    this.ausdiosSubscribe = this._clase4.audios().subscribe((response: audioModel[]) => {
+        this.listaAudios = response;
+        console.log('Lista de audios recibida:', this.listaAudios);
+        if (this.listaAudios.length > 0) {
+            const ultimoAudio = this.listaAudios[this.listaAudios.length - 1];
+            console.log('Último audio recibido:', ultimoAudio);
+            this.renderizarUltimoAudio(ultimoAudio);
+        }
+    });
+  }
+
+  currentAudioId: number | undefined;
+  renderizarUltimoAudio(audio: audioModel): void {
+    const audioElement = document.getElementById('audioPlayer') as HTMLAudioElement;
+    if (audioElement) {
+        // Modificar el enlace para que sea un enlace de descarga directa
+        const enlaceModificado = audio.audio.replace(/dl=0$/, 'dl=1');
+
+        console.log('Configurando el audio con URL:', enlaceModificado); // Log de la URL del audio
+        console.log('ID del audio:', audio.idclaseActividad3); // Log del ID del audio
+        this.currentAudioId = audio.idclaseActividad3
+        audioElement.src = enlaceModificado;
+    }
+}
 
   private avataresSubscribe: Subscription | undefined
   obtenerAvatares(): void {
@@ -119,9 +172,6 @@ export class Nivel4Component {
     console.log('Avatar seleccionado:', this.listaAvatares[this.currentIndex]);
   }
 
-  userNombre: String = ''
-  userLoginOn : boolean = false;
-  userLoginId : number = 0;
   userData : any = ""
 
   logout(): void {
@@ -148,41 +198,61 @@ export class Nivel4Component {
     this.router.navigateByUrl('/home/mapa');
   }
 
+  async saveDrawing() {
+    try {
+        const canvas = this.canvas;
+        const context = canvas.getContext('2d');
 
-  saveImage() {
-    const canvas = this.canvas;
-    const imageDataUrl = canvas.toDataURL('image/png');
+        if (!context) {
+            throw new Error('No se pudo obtener el contexto del canvas.');
+        }
 
-    // Convertimos la URL de datos base64 a un archivo Blob
-    const blob = this.dataURLtoBlob(imageDataUrl);
-    const formData = new FormData();
-    formData.append('image', blob, 'drawing.png');
+        const imageDataUrl = canvas.toDataURL('image/png');
 
-    // Aquí envías la imagen a tu API
-    this.http.post('https://tu-api.com/endpoint', formData).subscribe(
-      response => {
-        alert(`Imagen guardada exitosamente ${response}` );
-      },
-      error => {
-        alert(`Error al guardar la imagen' ${error}` );
-      }
-    );
-  }
+        // Extraer la parte base64 del DataURL
+        const base64Data = imageDataUrl.split(',')[1]; // Esto elimina el prefijo
 
-  // Función para convertir base64 a Blob
-  private dataURLtoBlob(dataUrl: string): Blob {
-    const arr = dataUrl.split(',');
-    const mime = arr[0].match(/:(.*?);/)![1];
-    const bstr = atob(arr[1]);
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
+        if (this.currentAudioId === undefined) {
+            throw new Error('El ID del audio no está definido.');
+        }
 
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
+        // Agregar un log para verificar el ID del audio que se está utilizando
+        console.log('ID del audio actual:', this.currentAudioId);
+
+        // Crear una instancia de clase4Model
+        const clase4ModelInstance: clase4Model = new clase4Model('');
+        clase4ModelInstance.idalumnofk.idAlumno = 1;
+        clase4ModelInstance.idaudiosactividad3fk.idclaseActividad3 = this.currentAudioId;
+
+        // Asignar la imagen en formato base64 (sin prefijo) al modelo
+        clase4ModelInstance.imagen = base64Data;
+
+        // Agregar console.log para ver el objeto que se va a enviar
+        console.log('Datos enviados a la API:', clase4ModelInstance);
+
+        // Guardar en la base de datos usando el método saveClase4
+        this._clase4.saveClase4(clase4ModelInstance).subscribe(
+          response => {
+            alert("Registro correcto");
+
+            // Limpiar el canvas después de guardar
+            context.clearRect(0, 0, canvas.width, canvas.height);
+          },
+          error => {
+            // Imprimir detalles del error
+            console.error('Error al guardar la imagen:', error);
+            if (error instanceof Error) {
+                console.error('Mensaje de error:', error.message);
+            } else if (typeof error === 'object') {
+                console.error('Detalles del error:', JSON.stringify(error));
+            }
+            alert(`Error al guardar la imagen: ${error.message || 'Error desconocido'}`);
+          }
+        );
+    } catch (error) {
+        alert(`Error en saveDrawing: ${error}`);
     }
-
-    return new Blob([u8arr], { type: mime });
-  }
+}
 
   loggedInUser = {
     username: 'Almendra',

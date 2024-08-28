@@ -1,10 +1,10 @@
 
+import { audioModel } from '../../audio/audio.model';
 import { clase4Model } from '../clase4.model';
 import { Observable } from "rxjs";
 
-export abstract class clase4Gateway {
-  abstract getAllAudio(): Observable<clase4Model>;
-  // abstract newTipoDocumento(tipoDocumento: tipoDocumentosModel): Observable<Object>;
-  // abstract getById(id: number): Observable<tipoDocumentosModel>;
-  // abstract updateTipoDocumento(id: number, tipoDocumento: tipoDocumentosModel): Observable<Object>;
+export abstract class Clase4Gateway {
+  // abstract getAllClase4(): Observable<clase4Model>;
+  abstract saveClase4(clase4: clase4Model): Observable<Object>;
+  abstract audios(): Observable<audioModel[]>
 }
